@@ -58,7 +58,30 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  // I need to add event listeners to catch certain key presses
+  // I'll add the event listener to the window
+  
 
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    if (!audio) return; // leave function if audio not found
+
+    audio.currentTime = 0;
+    audio.play();
+
+    key.classList.add('playing');
+  }
+
+  function removeTransition(e) {
+    const key = document.querySelector(`.key[data-key = "${e.keyCode}"]`);
+    if(!key) return;
+    key.classList.remove('playing');
+  }
+
+  window.addEventListener('keydown', playSound);
+
+  window.addEventListener('keyup', removeTransition);
 </script>
 
 
